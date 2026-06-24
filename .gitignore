@@ -1,0 +1,13 @@
+/.DS_Store
+/__pycache__
+/data
+/kernel
+/img
+/results
+*.jpg
+*.gif
+*.png
+*.pdf
+*.cdf
+*.fits
+*.pyc
