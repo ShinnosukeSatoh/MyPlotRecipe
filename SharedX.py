@@ -630,14 +630,24 @@ class ShareXaxis():
                 ax0.tick_params(axis='x', labelbottom=False)  # ラベルを消す
             if ticks is None:
                 ax0.xaxis.set_major_formatter(mdates.DateFormatter(format))
-                ax0.xaxis.set_major_locator(mdates.MinuteLocator())
                 if format == '%H:%M':
+                    ax0.xaxis.set_major_locator(mdates.MinuteLocator())
                     ax0.xaxis.set_minor_locator(mdates.SecondLocator(30))
+                elif format == '%Y-%m-%d':
+                    ax0.minorticks_off()
+                    ax0.xaxis.set_minor_locator(mdates.MonthLocator())
             else:
                 ax0.set_xticks(ticks)
                 ax0.set_xticklabels(ticklabels, linespacing=1.1)
-                ax0.xaxis.set_minor_locator(
-                    ptick.AutoMinorLocator(minor_num))  # minor ticks
+                if format == '%H:%M':
+                    ax0.xaxis.set_major_locator(mdates.MinuteLocator())
+                    ax0.xaxis.set_minor_locator(mdates.SecondLocator(30))
+                elif format == '%Y-%m-%d':
+                    ax0.minorticks_off()
+                    ax0.xaxis.set_minor_locator(mdates.MonthLocator())
+                else:
+                    ax0.xaxis.set_minor_locator(
+                        ptick.AutoMinorLocator(minor_num))  # minor ticks
             return None
 
         if self.nrows > 1:
@@ -653,6 +663,10 @@ class ShareXaxis():
                 else:
                     _set_ticks(ax1)
                     fig.tight_layout()
+                    if i != 0:
+                        ax2 = ax1.twiny()
+                        _set_ticks(ax2, direction='out')
+                        ax2.tick_params(labeltop=False)
                     if i != ax.size-1:
                         ax1.tick_params(labelbottom=False)
 
