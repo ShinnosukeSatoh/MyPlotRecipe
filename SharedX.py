@@ -131,7 +131,7 @@ class ShareXaxis():
             xscale='linear',):
 
         if type(min) is datetime:
-            print('time format 0')
+            # print('time format 0')
             if type(label) is str:
                 if self.ncols == 1:
                     self.plot_xaxis_timeformat(
@@ -145,7 +145,7 @@ class ShareXaxis():
                         ticklabels=ticklabels,
                         minor_num=minor_num,
                         format=format,)
-                    print('time format 1')
+                    # print('time format 1')
                 else:
                     print('Sorry, not compatible so far.')
 
@@ -257,8 +257,9 @@ class ShareXaxis():
                 if yscale == 'linear':
                     ax.yaxis.set_minor_locator(
                         ptick.AutoMinorLocator(minor_num))
-            if yscale == 'log':
-                _logticklocate(ax=ax)
+            else:
+                if yscale == 'log':
+                    _logticklocate(ax=ax)
             return None
 
         def _logticklocate(ax):
@@ -539,22 +540,7 @@ class ShareXaxis():
         # fig.subplots_adjust(hspace=self.hspace)
         # fig.subplots_adjust(wspace=self.wspace)
 
-        def _bottom_xaxis(ax0):
-            ax0.set_xscale(xscale)
-            ax0.set_xlim(min, max)
-            ax0.tick_params(axis='both', labelsize=self.fontsize)
-            if ticks is not None:
-                ax0.set_xticks(ticks)
-                ax0.set_xticklabels(
-                    ticklabels, fontsize=self.fontsize, linespacing=1.1)
-                if xscale == 'linear':
-                    ax0.xaxis.set_minor_locator(
-                        ptick.AutoMinorLocator(minor_num))  # minor ticks
-            if xscale == 'log':
-                _logticklocate(ax0)
-            return None
-
-        def _set_ticks(ax0, direction='out'):
+        def _set_ticks(ax0, bottom=True, direction='out'):
             ax0.set_xscale(xscale)
             ax0.set_xlim(min, max)
             ax0.tick_params(axis='x', labelsize=self.fontsize)
@@ -563,7 +549,8 @@ class ShareXaxis():
                                 direction='inout', length=10,)
                 ax0.tick_params(axis='x', which='minor',
                                 direction='inout', length=7,)
-                ax0.tick_params(axis='x', labelbottom=False)  # ラベルを消す
+                if not bottom:
+                    ax0.tick_params(axis='x', labelbottom=False)  # ラベルを消す
             if ticks is not None:
                 ax0.set_xticks(ticks)
                 ax0.set_xticklabels(ticklabels,
@@ -572,8 +559,9 @@ class ShareXaxis():
                 if xscale == 'linear':
                     ax0.xaxis.set_minor_locator(
                         ptick.AutoMinorLocator(minor_num))  # minor ticks
-            if xscale == 'log':
-                _logticklocate(ax0)
+            else:
+                if xscale == 'log':
+                    _logticklocate(ax0)
             return None
 
         def _logticklocate(ax0):
@@ -584,22 +572,22 @@ class ShareXaxis():
 
         if self.nrows == 1:
             ax0 = ax
-            _bottom_xaxis(ax0)
+            _set_ticks(ax0, bottom=True)
 
         else:
             for i in range(ax.size):
                 ax0 = ax[i]
                 # _bottom_xaxis(ax0)
-                _set_ticks(ax0)
+                _set_ticks(ax0, bottom=False)
 
                 if self.hspace == 0:
                     if i != ax.size-1:
-                        _set_ticks(ax0, direction='inout')
+                        _set_ticks(ax0, bottom=False, direction='inout')
                 else:
                     fig.tight_layout()
                     if i != 0:
                         ax1 = ax0.twiny()
-                        _set_ticks(ax1, direction='out')
+                        _set_ticks(ax1, bottom=False, direction='out')
                         ax1.tick_params(labeltop=False)
                     if i != ax.size-1:
                         ax0.tick_params(labelbottom=False)
