@@ -557,8 +557,11 @@ class ShareXaxis():
                                     fontsize=self.fontsize,
                                     linespacing=1.1)
                 if xscale == 'linear':
-                    ax0.xaxis.set_minor_locator(
-                        ptick.AutoMinorLocator(minor_num))  # minor ticks
+                    if minor_num == None:
+                        ax0.minorticks_off()
+                    else:
+                        ax0.xaxis.set_minor_locator(
+                            ptick.AutoMinorLocator(minor_num))  # minor ticks
             else:
                 if xscale == 'log':
                     _logticklocate(ax0)
@@ -634,8 +637,11 @@ class ShareXaxis():
                     ax0.minorticks_off()
                     ax0.xaxis.set_minor_locator(mdates.MonthLocator())
                 else:
-                    ax0.xaxis.set_minor_locator(
-                        ptick.AutoMinorLocator(minor_num))  # minor ticks
+                    if minor_num == None:
+                        ax0.minorticks_off()
+                    else:
+                        ax0.xaxis.set_minor_locator(
+                            ptick.AutoMinorLocator(minor_num))  # minor ticks
             return None
 
         if self.nrows > 1:
