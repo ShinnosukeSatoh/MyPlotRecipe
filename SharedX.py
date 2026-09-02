@@ -239,6 +239,7 @@ class ShareXaxis():
             ax_idx,
             label=r'$y$',
             labelcolor='k',
+            axiscolor='k',
             min=0.0,
             max=1.0,
             ticks=None,
@@ -279,6 +280,10 @@ class ShareXaxis():
             _yaxis(ax)
 
             ax.set_ylabel(label, fontsize=self.fontsize, color=labelcolor)
+            ax.spines['left'].set_color(axiscolor)
+            ax.tick_params(axis='y', which='both',
+                           labelsize=self.fontsize,
+                           colors=axiscolor)
 
             if yscale == 'log':
                 if adjust:
@@ -307,14 +312,21 @@ class ShareXaxis():
                 _yaxis(ax)
 
                 if i == 0:
-                    ax.set_ylabel(label, fontsize=self.fontsize)
+                    ax.set_ylabel(label, fontsize=self.fontsize,
+                                  color=labelcolor)
+                    ax.spines['left'].set_color(axiscolor)
+                    ax.tick_params(axis='y', which='both',
+                                   labelsize=self.fontsize,
+                                   colors=axiscolor)
                     ax2 = ax.secondary_yaxis(location='right')
                     _yaxis(ax2)
                     if self.wspace > 0:
                         ax2.tick_params(axis='y', which='major',
-                                        direction='out')
+                                        direction='out',
+                                        colors=axiscolor)
                         ax2.tick_params(axis='y', which='minor',
-                                        direction='out')
+                                        direction='out',
+                                        colors=axiscolor)
                     plt.setp(ax2.get_yticklabels(),
                              visible=False)  # ラベルを消す
                 elif i == self.ncols-1:
@@ -323,17 +335,21 @@ class ShareXaxis():
                     # _yaxis(ax2)
                     if self.wspace == 0:
                         ax.tick_params(axis='y', which='major',
-                                       direction='inout')
+                                       direction='inout',
+                                       colors=axiscolor)
                         ax.tick_params(axis='y', which='minor',
-                                       direction='inout')
+                                       direction='inout',
+                                       colors=axiscolor)
                     plt.setp(ax.get_yticklabels(),
                              visible=False)  # ラベルを消す
                 else:
                     if self.wspace == 0:
                         ax.tick_params(axis='y', which='major',
-                                       direction='inout')
+                                       direction='inout',
+                                       colors=axiscolor)
                         ax.tick_params(axis='y', which='minor',
-                                       direction='inout')
+                                       direction='inout',
+                                       colors=axiscolor)
                     plt.setp(ax.get_yticklabels(),
                              visible=False)  # ラベルを消す
 
