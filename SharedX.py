@@ -401,6 +401,9 @@ class ShareXaxis():
         elif panel_beginwith == 'd':
             self.panelname = [' d ', ' e ', ' f ', ' g ',
                               ' h ', ' i ', ' j ', ' k ', ' l ', ' m ', ' o ']
+        elif panel_beginwith == 'e':
+            self.panelname = [' e ', ' f ', ' g ', ' h ',
+                              ' i ', ' j ', ' k ', ' l ', ' m ', ' o ', ' p ']
         elif panel_beginwith == 'A':
             self.panelname = [' A ', ' B ', ' C ', ' D ',
                               ' E ', ' F ', ' G ', ' H ', ' I ', ' J ', ' K ']
@@ -413,6 +416,9 @@ class ShareXaxis():
         elif panel_beginwith == 'D':
             self.panelname = [' D ', ' E ', ' F ', ' G ',
                               ' H ', ' I ', ' J ', ' K ', ' L ', ' M ', ' O ']
+        elif panel_beginwith == 'E':
+            self.panelname = [' E ', ' F ', ' G ', ' H ',
+                              ' I ', ' J ', ' K ', ' L ', ' M ', ' O ', ' P ']
         elif panel_beginwith == 'i':
             self.panelname = [' i ', ' ii ', ' iii ', ' iv ', ' v ',
                               ' vi ', ' vii ', ' viii ', ' ix ', ' x ', ' xi ']
