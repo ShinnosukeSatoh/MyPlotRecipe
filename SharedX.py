@@ -1293,3 +1293,31 @@ class ShareXaxis():
                    [0.9769, 0.9839, 0.0805]]
 
         return cm_data
+
+    def parula(self):
+        cm_data = self._parula_colors()
+        parula = self._generate_cmap(cm_data)
+        cmap = parula
+
+        return cmap
+
+    def IDL_blue_white(self, bad_black=True):
+        IDL_BLUE_WHITE_CMAP = mplC.LinearSegmentedColormap.from_list(
+            "idl_blue_white",
+            [
+                (0.00, (0.00, 0.00, 0.00)),
+                (0.10, (0.00, 0.00, 0.22)),
+                (0.25, (0.02, 0.02, 0.48)),
+                (0.45, (0.08, 0.22, 0.68)),
+                (0.65, (0.08, 0.55, 0.88)),
+                (0.82, (0.45, 0.70, 0.88)),
+                (0.92, (0.75, 0.84, 0.90)),
+                (1.00, (1.00, 1.00, 1.00)),
+            ],
+        )
+        NO_DATA_COLOR = (51/255.0, 51/255.0, 51/255.0)
+        if bad_black:
+            NO_DATA_COLOR = (1/255.0, 1/255.0, 1/255.0)
+        IDL_BLUE_WHITE_CMAP.set_bad(NO_DATA_COLOR)
+
+        return IDL_BLUE_WHITE_CMAP
