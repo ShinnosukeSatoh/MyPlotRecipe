@@ -892,10 +892,13 @@ class ShareXaxis():
                 rotation=0,
                 zorder=2.0,):
 
-        if self.nrows == 1:
-            ax = self.ax
+        if type(ax_idx) is int:
+            if self.nrows == 1:
+                ax = self.ax
+            else:
+                ax = self.ax[ax_idx]
         else:
-            ax = self.ax[ax_idx]
+            ax = ax_idx
 
         if facealpha < 1.0:
             if type(facecolor) is str:
