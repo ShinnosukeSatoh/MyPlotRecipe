@@ -881,6 +881,7 @@ class ShareXaxis():
                 text,
                 textcolor='w',
                 textshadow=True,
+                textedge=False,
                 fontsize=18,
                 fontweight='normal',
                 facecolor='k',
@@ -915,10 +916,13 @@ class ShareXaxis():
 
         if textshadow:
             width = 0.66
+            linewidth = 0.0
+            if textedge:
+                linewidth = width
             path_effects = [pe.PathPatchEffect(offset=(width, -width),
                                                linewidth=width,
                                                facecolor='k'),
-                            pe.withStroke(linewidth=0., foreground='w')]
+                            pe.withStroke(linewidth=linewidth, foreground='k')]
         else:
             path_effects = None
 
