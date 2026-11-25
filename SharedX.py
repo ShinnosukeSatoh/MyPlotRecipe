@@ -114,7 +114,7 @@ class ShareXaxis():
         }
         plt.rcParams.update(params)
         plt.rcParams['font.size'] = self.fontsize
-        plt.rcParams['axes.unicode_minus'] = False  # ハイフンをUnicodeマイナスに統一
+        plt.rcParams['axes.unicode_minus'] = True  # ハイフンをUnicodeマイナスに統一
 
         return None
 
