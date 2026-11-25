@@ -467,7 +467,7 @@ class ShareXaxis():
                         color='w',
                         fontsize=self.panelname_fontsize,
                         verticalalignment='top',
-                        horizontalalignment='left',
+                        orizontalalignment=self.panelname_xposition,
                         path_effects=path_effects,
                         bbox=dict(fc='none', ec='none', pad=2.6, lw=0.), zorder=99)
         else:
